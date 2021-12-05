@@ -19,6 +19,7 @@ class MessageFactory
 		
 		$email = new \SendGrid\Mail\Mail();
 		$email->setFrom($from, $message->getFrom()[$from] ?? null);
+		
 		if ($message->getSubject()) {
 			$email->setSubject($message->getSubject());
 		}
