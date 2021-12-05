@@ -31,7 +31,7 @@ class SengridMailerDI extends \Nette\DI\CompilerExtension
 		$builder->addDefinition($this->prefix('mailer'), new ServiceDefinition())
 			->setType(Mailer::class)
 			->setArguments([
-				'defaultFrom' => $config->defaultFrom,
+				'apiKey' => $config->apiKey,
 			]);
 	}
 }
