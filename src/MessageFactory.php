@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace SendgridMailer;
 
+use Nette\InvalidStateException;
 use Nette\Mail\Message;
 use SendGrid\Mail\Mail;
 
@@ -12,7 +13,7 @@ class MessageFactory
 	public function createMail(Message $message): Mail
 	{
 		if ($message->getFrom() === null) {
-			throw new \DomainException('getFrom() cannot return null');
+			throw new InvalidStateException('getFrom() cannot return null');
 		}
 		
 		$from = (string) \key($message->getFrom());
