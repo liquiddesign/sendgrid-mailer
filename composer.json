@@ -1,0 +1,29 @@
+{
+	"name": "liquiddesign/sendgrid-mailer",
+	"description": "△ Implementace Nette Maileru pro Sendgrid",
+	"license": "MIT",
+	"autoload": {
+		"psr-4": {"SendgridMailer\\": "src/"}
+	},
+	"require" :
+	{
+		"php":">=7.4",
+		"nette/mail":"^3.0",
+		"nette/di":"^3.0",
+		"sendgrid/sendgrid": "^7.0"
+	},
+	"require-dev": 
+	{
+		"nette/tester":"*",
+		"tracy/tracy":"*",
+		"composer/composer": "*",
+		"liquiddesign/codestyle": "@dev",
+		"phpstan/phpstan": "*"
+	},
+	"scripts": {
+		"phpstan": "phpstan analyse --memory-limit 1G -c phpstan.neon",
+		"phpcs": "phpcs --standard=ruleset.xml --ignore=assets src",
+		"phpcsfix": "phpcbf --standard=ruleset.xml --ignore=assets src",
+		"tester": "tester tests/Tests/*.phpt  -c tests/php.ini --setup tests/setup.php"
+	}
+}
