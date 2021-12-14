@@ -1,4 +1,4 @@
-# △ Sengrid Mailer
+# △ Sendgrid Mailer
 Implementace Nette Maileru pro Sendgrid
 
 ![Actions](https://github.com/liquiddesign/sendgrid-mailer/actions/workflows/php.yml/badge.svg)
