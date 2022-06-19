@@ -43,6 +43,13 @@ class MessageFactory
 				$email->addBcc($recipient, $name);
 			}
 		}
+		
+		foreach ($message->getAttachments() as $attachment) {
+			$output = [];
+			\preg_match_all('/(.+);.*filename=\"(.+)\"/', $attachment->getHeader('Content-Disposition'), $output);
+			
+			$email->addAttachment(\base64_encode($attachment->getBody()), $attachment->getHeader('Content-Type'), $output[2][0] ?? 'file', $output[1][0] ?? 'attachment');
+		}
 
 		return $email;
 	}
