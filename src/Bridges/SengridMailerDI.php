@@ -15,7 +15,7 @@ class SengridMailerDI extends \Nette\DI\CompilerExtension
 	public function getConfigSchema(): Schema
 	{
 		return Expect::structure([
-			'apiKey' => Expect::string()->required(),
+			'apiKey' => Expect::string(),
 		]);
 	}
 	
@@ -27,6 +27,10 @@ class SengridMailerDI extends \Nette\DI\CompilerExtension
 		$builder = $this->getContainerBuilder();
 		$builder->addDefinition($this->prefix('messageFactory'), new ServiceDefinition())
 			->setType(MessageFactory::class);
+		
+		if (!$config->apiKey) {
+			return;
+		}
 		
 		$builder->removeDefinition('mail.mailer');
 		$builder->addDefinition($this->prefix('mail.mailer'), new ServiceDefinition())
