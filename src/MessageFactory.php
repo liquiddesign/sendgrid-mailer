@@ -43,6 +43,10 @@ class MessageFactory
 				$email->addBcc($recipient, $name);
 			}
 		}
+
+		if ($message->getHeader('Reply-To')) {
+			$email->setReplyTo($message->getHeader('Reply-To'));
+		}
 		
 		foreach ($message->getAttachments() as $attachment) {
 			$output = [];
