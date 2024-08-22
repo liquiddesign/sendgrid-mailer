@@ -6,7 +6,9 @@ namespace SendgridMailer;
 
 use Nette\InvalidStateException;
 use Nette\Mail\Message;
+use Nette\Utils\Arrays;
 use SendGrid\Mail\Mail;
+use SendGrid\Mail\ReplyTo;
 
 class MessageFactory
 {
@@ -44,8 +46,13 @@ class MessageFactory
 			}
 		}
 
-		if ($message->getHeader('Reply-To')) {
-			$email->setReplyTo($message->getHeader('Reply-To'));
+		if ($message->addReplyTo('Reply-To')) {
+			$firstReplyTo = \array_keys($message->getHeader('Reply-To'))[0] ?? null;
+			$firstReplyToName = Arrays::first($message->getHeader('Reply-To'));
+
+			if ($firstReplyTo) {
+				$email->setReplyTo($firstReplyTo, $firstReplyToName);
+			}
 		}
 		
 		foreach ($message->getAttachments() as $attachment) {
