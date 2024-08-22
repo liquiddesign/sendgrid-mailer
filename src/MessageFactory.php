@@ -8,7 +8,6 @@ use Nette\InvalidStateException;
 use Nette\Mail\Message;
 use Nette\Utils\Arrays;
 use SendGrid\Mail\Mail;
-use SendGrid\Mail\ReplyTo;
 
 class MessageFactory
 {
@@ -46,9 +45,12 @@ class MessageFactory
 			}
 		}
 
-		if ($message->addReplyTo('Reply-To')) {
-			$firstReplyTo = \array_keys($message->getHeader('Reply-To'))[0] ?? null;
-			$firstReplyToName = Arrays::first($message->getHeader('Reply-To'));
+		/** @var array<string, string> $replyTo */
+		$replyTo = $message->getHeader('Reply-To');
+
+		if ($replyTo) {
+			$firstReplyTo = \array_keys($replyTo)[0] ?? null;
+			$firstReplyToName = Arrays::first($replyTo);
 
 			if ($firstReplyTo) {
 				$email->setReplyTo($firstReplyTo, $firstReplyToName);
