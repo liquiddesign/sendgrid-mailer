@@ -8,7 +8,7 @@
 	"require" :
 	{
 		"php":">=7.4",
-		"nette/mail":"^3.0",
+		"nette/mail":"^3.0 || ^4.0",
 		"nette/di":"^3.0",
 		"sendgrid/sendgrid": "^7.0"
 	},
